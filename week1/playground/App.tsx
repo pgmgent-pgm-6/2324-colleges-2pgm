@@ -1,11 +1,14 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
-import Example from "./components/Example";
+import { SafeAreaView, StyleSheet, View } from "react-native";
+import Oefening1 from "./components/Oefening1";
+import Oefening2 from "./components/Oefening2";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Example />
+      <SafeAreaView>
+        <Oefening2 />
+      </SafeAreaView>
       <StatusBar style="dark" />
     </View>
   );
