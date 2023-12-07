@@ -41,6 +41,12 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
+        name="projects"
+        options={{
+          title: "Projects",
+        }}
+      />
+      <Tabs.Screen
         name="clients"
         options={{
           title: "Clients",

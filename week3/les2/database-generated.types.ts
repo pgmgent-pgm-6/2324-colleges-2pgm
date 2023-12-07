@@ -14,18 +14,53 @@ export interface Database {
           created_at: string
           id: number
           name: string
+          owner_id: string
         }
         Insert: {
           created_at?: string
           id?: number
           name: string
+          owner_id: string
         }
         Update: {
           created_at?: string
           id?: number
           name?: string
+          owner_id?: string
         }
         Relationships: []
+      }
+      projects: {
+        Row: {
+          client_id: number
+          created_at: string
+          id: number
+          name: string
+          owner_id: string
+        }
+        Insert: {
+          client_id: number
+          created_at?: string
+          id?: number
+          name: string
+          owner_id?: string
+        }
+        Update: {
+          client_id?: number
+          created_at?: string
+          id?: number
+          name?: string
+          owner_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_client_id_fkey"
+            columns: ["client_id"]
+            isOneToOne: false
+            referencedRelation: "clients"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {

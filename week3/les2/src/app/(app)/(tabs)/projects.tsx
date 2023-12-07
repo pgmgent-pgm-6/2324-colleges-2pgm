@@ -1,4 +1,4 @@
-import { getClients } from "@core/modules/clients/api";
+import { getProjects } from "@core/modules/projects/api";
 import Divider from "@design/List/Divider";
 import ListItem from "@design/List/ListItem";
 import LoadingIndicator from "@design/LoadingIndicator";
@@ -7,14 +7,12 @@ import CenteredView from "@design/View/CenteredView";
 import DefaultView from "@design/View/DefaultView";
 import EmptyView from "@design/View/EmptyView";
 import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "expo-router";
 import { FlatList } from "react-native";
 
-const ClientsScreen = () => {
-  const router = useRouter();
+const ProjectsScreen = () => {
   const { data, isLoading, isError, error } = useQuery({
-    queryFn: getClients,
-    queryKey: ["clients"],
+    queryFn: getProjects,
+    queryKey: ["projects"],
   });
 
   if (isError) {
@@ -40,10 +38,10 @@ const ClientsScreen = () => {
   if (data.length === 0) {
     return (
       <EmptyView
-        title="Nog geen klant"
-        description="Maak nu je eerste klant aan"
+        title="Nog geen project"
+        description="Maak nu je eerste project aan"
         onPress={() => {}}
-        icon="briefcase-account"
+        icon="folder"
       />
     );
   }
@@ -54,20 +52,10 @@ const ClientsScreen = () => {
         data={data}
         keyExtractor={(item) => String(item.id)}
         ItemSeparatorComponent={() => <Divider />}
-        renderItem={({ item }) => (
-          <ListItem
-            title={item.name}
-            onPress={() =>
-              router.push({
-                pathname: "/clients/:id",
-                params: { id: item.id },
-              })
-            }
-          />
-        )}
+        renderItem={({ item }) => <ListItem title={item.name} onPress={() => {}} />}
       />
     </DefaultView>
   );
 };
 
-export default ClientsScreen;
+export default ProjectsScreen;
