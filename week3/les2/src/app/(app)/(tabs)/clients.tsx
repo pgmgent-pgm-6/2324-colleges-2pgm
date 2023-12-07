@@ -7,23 +7,16 @@ import ErrorMessage from "@design/Text/ErrorMessage";
 import CenteredView from "@design/View/CenteredView";
 import DefaultView from "@design/View/DefaultView";
 import EmptyView from "@design/View/EmptyView";
-import { useEffect, useState } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { useQuery } from "@tanstack/react-query";
+import { FlatList, StyleSheet, View } from "react-native";
 
 const ClientsScreen = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>();
-  const [list, setList] = useState<Client[] | null>();
+  const { data, isLoading, isError, error } = useQuery({
+    queryFn: getClients,
+    queryKey: ["clients"],
+  });
 
-  useEffect(() => {
-    setIsLoading(true);
-    getClients()
-      .then((data) => setList(data))
-      .catch((error) => setError(error))
-      .finally(() => setIsLoading(false));
-  }, []);
-
-  if (error) {
+  if (isError) {
     return (
       <DefaultView>
         <ErrorMessage error={error} />
@@ -31,7 +24,7 @@ const ClientsScreen = () => {
     );
   }
 
-  if (isLoading || !list) {
+  if (isLoading || !data) {
     return (
       <CenteredView>
         <LoadingIndicator />
@@ -39,11 +32,11 @@ const ClientsScreen = () => {
     );
   }
 
-  if (!list) {
+  if (!data) {
     return null;
   }
 
-  if (list.length === 0) {
+  if (data.length === 0) {
     return (
       <EmptyView
         title="Nog geen klant"
@@ -57,7 +50,7 @@ const ClientsScreen = () => {
   return (
     <DefaultView padding={false}>
       <FlatList
-        data={list}
+        data={data}
         keyExtractor={(item) => String(item.id)}
         ItemSeparatorComponent={() => <Divider />}
         renderItem={({ item }) => <ListItem title={item.name} onPress={() => {}} />}
