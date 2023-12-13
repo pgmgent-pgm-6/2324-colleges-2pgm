@@ -5,7 +5,7 @@ import { DefaultStyles, Variables } from "@style";
 import FieldError from "@design/Form/FieldError";
 import Label from "@design/Form/Label";
 
-type Props = TextInputProps & {
+export type TextFieldProps = TextInputProps & {
   name: string;
   value: string;
   label?: string;

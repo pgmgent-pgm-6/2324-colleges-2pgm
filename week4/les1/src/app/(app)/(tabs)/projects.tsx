@@ -7,7 +7,7 @@ const ProjectsScreen = () => {
   const router = useRouter();
 
   const handleAddProject = () => {
-    router.push("/projects/add");
+    router.push("/projects/create");
   };
 
   return (

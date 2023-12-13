@@ -6,10 +6,19 @@ import Title from "@design/Text/Title";
 import { Variables } from "@style";
 import DefaultView from "@design/View/DefaultView";
 import { useMutation } from "@tanstack/react-query";
-import { login } from "@core/modules/auth/api";
+import { LoginBody, login } from "@core/modules/auth/api";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import ErrorMessage from "@design/Text/ErrorMessage";
+import AppForm from "@shared/Formik/AppForm";
+import * as yup from "yup";
+import AppTextField from "@shared/Formik/AppTextField";
+import AppSubmitButton from "@shared/Formik/AppSubmitButton";
+
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});
 
 const LoginScreen = () => {
   const router = useRouter();
@@ -17,12 +26,7 @@ const LoginScreen = () => {
     mutationFn: login,
   });
 
-  const [data, setData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleSubmit = () => {
+  const handleSubmit = (data: LoginBody) => {
     mutate(data, {
       onSuccess: () => {
         router.push("/(app)/(tabs)/");
@@ -30,40 +34,24 @@ const LoginScreen = () => {
     });
   };
 
-  const setDataField = (name: string, value: string) => {
-    setData({
-      ...data,
-      [name]: value,
-    });
-  };
-
   return (
-    <DefaultView style={styles.container}>
-      <Logo />
-      <Title style={styles.title}>Login met je account</Title>
-      {isError && <ErrorMessage error={error} />}
-      <TextField
-        label="Email"
-        name="email"
-        value={data.email}
-        placeholder="john@doe.com"
-        autoComplete="email"
-        keyboardType="email-address"
-        disabled={isPending}
-        onChangeText={(text: string) => setDataField("email", text)}
-      />
-      <TextField
-        label="Password"
-        name="password"
-        value={data.password}
-        secureTextEntry={true}
-        disabled={isPending}
-        onChangeText={(text: string) => setDataField("password", text)}
-      />
-      <Button onPress={handleSubmit} disabled={isPending} style={styles.button}>
-        Login
-      </Button>
-    </DefaultView>
+    <AppForm initialValues={{ email: "", password: "" }} validationSchema={schema} onSubmit={handleSubmit}>
+      <DefaultView style={styles.container}>
+        <Logo />
+        <Title style={styles.title}>Login met je account</Title>
+        {isError && <ErrorMessage error={error} />}
+        <AppTextField
+          label="Email"
+          name="email"
+          placeholder="john@doe.com"
+          autoComplete="email"
+          keyboardType="email-address"
+          disabled={isPending}
+        />
+        <AppTextField label="Password" name="password" secureTextEntry={true} disabled={isPending} />
+        <AppSubmitButton disabled={isPending}>Login</AppSubmitButton>
+      </DefaultView>
+    </AppForm>
   );
 };
 
@@ -77,10 +65,6 @@ const styles = StyleSheet.create({
   title: {
     marginTop: Variables.sizes.medium,
     marginBottom: Variables.sizes.xl,
-  },
-  button: {
-    marginTop: Variables.sizes.xs,
-    width: "100%",
   },
 });
 
