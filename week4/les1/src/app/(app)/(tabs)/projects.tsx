@@ -6,6 +6,10 @@ import { useRouter } from "expo-router";
 const ProjectsScreen = () => {
   const router = useRouter();
 
+  const handleAddProject = () => {
+    router.push("/projects/add");
+  };
+
   return (
     <DataListView
       method={getProjects}
@@ -14,7 +18,7 @@ const ProjectsScreen = () => {
       emptyDescription="Maak nu je eerste project aan"
       emptyIcon="folder"
       onAddItem={() => {}}
-      renderItem={({ item }) => <ListItem title={item.name} onPress={() => {}} />}
+      renderItem={({ item }) => <ListItem title={item.name} onPress={handleAddProject} />}
     />
   );
 };

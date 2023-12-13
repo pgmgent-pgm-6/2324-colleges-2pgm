@@ -6,6 +6,10 @@ import { useRouter } from "expo-router";
 const ClientsScreen = () => {
   const router = useRouter();
 
+  const handleAddClient = () => {
+    router.push("/clients/add");
+  };
+
   return (
     <DataListView
       method={getClients}
@@ -14,7 +18,7 @@ const ClientsScreen = () => {
       emptyDescription="Maak nu je eerste klant aan"
       emptyIcon="briefcase-account"
       onAddItem={() => {}}
-      renderItem={({ item }) => <ListItem title={item.name} onPress={() => {}} />}
+      renderItem={({ item }) => <ListItem title={item.name} onPress={handleAddClient} />}
     />
   );
 };
