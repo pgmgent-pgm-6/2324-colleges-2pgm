@@ -9,7 +9,7 @@ export type AppSpinnerFieldProps = {
 } & Omit<SpinnerFieldProps, "value" | "onChange">;
 
 const AppSpinnerField = ({ name, items, ...rest }: AppSpinnerFieldProps) => {
-  const { values, touched, errors, handleBlur, setFieldValue } = useFormikContext();
+  const { values, touched, errors, handleBlur, setFieldValue } = useFormikContext<Record<string, any>>();
   const hasError = errors[name] && touched[name];
   const value = values[name];
 

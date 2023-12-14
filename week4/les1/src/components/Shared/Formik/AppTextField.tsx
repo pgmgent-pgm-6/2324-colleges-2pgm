@@ -4,7 +4,7 @@ import { useFormikContext } from "formik";
 type Props = Omit<TextFieldProps, "value" | "onChangeText">;
 
 const AppTextField = ({ name, ...rest }: Props) => {
-  const { values, errors, touched, setFieldValue, handleBlur } = useFormikContext();
+  const { values, errors, touched, setFieldValue, handleBlur } = useFormikContext<Record<string, any>>();
   const hasError = errors[name] && touched[name];
 
   return (

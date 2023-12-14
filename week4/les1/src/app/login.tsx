@@ -1,6 +1,4 @@
-import { StyleSheet, View } from "react-native";
-import Button from "@design/Button/Button";
-import TextField from "@design/Form/TextField";
+import { StyleSheet } from "react-native";
 import Logo from "@design/Logo/Logo";
 import Title from "@design/Text/Title";
 import { Variables } from "@style";
