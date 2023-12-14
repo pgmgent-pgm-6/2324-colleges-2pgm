@@ -1,4 +1,5 @@
 import { getClients } from "@core/modules/clients/api";
+import { Client } from "@core/modules/clients/types";
 import HeaderButton from "@design/Button/HeaderButton";
 import ListItem from "@design/List/ListItem";
 import DataListView from "@shared/Data/DataListView";
@@ -13,11 +14,13 @@ const ClientsScreen = () => {
     router.push("/clients/create");
   };
 
+  const handleClientPress = (client: Client) => {
+    router.push(`/clients/${client.id}`);
+  };
+
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <HeaderButton onPress={() => router.push("/clients/create")} title="Add client" icon="plus" />
-      ),
+      headerRight: () => <HeaderButton onPress={handleAddClient} title="Add client" icon="plus" />,
     });
   }, [navigation]);
 
@@ -28,8 +31,8 @@ const ClientsScreen = () => {
       emptyTitle="Nog geen klant"
       emptyDescription="Maak nu je eerste klant aan"
       emptyIcon="briefcase-account"
-      onAddItem={() => {}}
-      renderItem={({ item }) => <ListItem title={item.name} onPress={handleAddClient} />}
+      onAddItem={handleAddClient}
+      renderItem={({ item }) => <ListItem title={item.name} onPress={() => handleClientPress(item)} />}
     />
   );
 };

@@ -1,12 +1,15 @@
 import { logout } from "@core/modules/auth/api";
 import Button from "@design/Button/Button";
 import Text from "@design/Text/Text";
+import { useAuthContext } from "@shared/Auth/AuthProvider";
 import { StyleSheet, View } from "react-native";
 
 const SettingsScreen = () => {
+  const { user } = useAuthContext();
   return (
     <View style={styles.container}>
       <Button onPress={() => logout()}>Logout</Button>
+      <Text>{user?.user_metadata.first_name} </Text>
       <Text style={styles.title}>Settings</Text>
     </View>
   );

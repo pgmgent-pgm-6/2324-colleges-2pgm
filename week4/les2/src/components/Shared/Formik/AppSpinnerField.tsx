@@ -15,7 +15,7 @@ const AppSpinnerField = ({ name, items, ...rest }: AppSpinnerFieldProps) => {
 
   // if no item is set, set the first item
   useEffect(() => {
-    if (isVoid(value)) {
+    if (isVoid(value) && items.length > 0) {
       setFieldValue(name, items[0].value);
     }
   }, [value]);
@@ -27,7 +27,7 @@ const AppSpinnerField = ({ name, items, ...rest }: AppSpinnerFieldProps) => {
       onChange={(value: string | number) => setFieldValue(name, value)}
       onBlur={handleBlur(name)}
       items={items}
-      error={hasError ? errors[name] : null}
+      error={hasError ? String(errors[name]) : null}
       {...rest}
     />
   );

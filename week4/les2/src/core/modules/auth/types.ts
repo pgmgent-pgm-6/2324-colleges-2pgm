@@ -8,3 +8,12 @@ export type User = {
   id: string;
   email: string;
 } & UserMetaData;
+
+export type CreateUserBody = {
+  email: string;
+  password: string;
+} & UserMetaData;
+
+export type UpdateUserBody = CreateUserBody & {
+  id: string;
+};

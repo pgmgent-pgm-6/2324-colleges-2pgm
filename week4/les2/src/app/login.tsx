@@ -12,6 +12,7 @@ import AppForm from "@shared/Formik/AppForm";
 import * as yup from "yup";
 import AppTextField from "@shared/Formik/AppTextField";
 import AppSubmitButton from "@shared/Formik/AppSubmitButton";
+import TextButton from "@design/Button/TextButton";
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -48,6 +49,9 @@ const LoginScreen = () => {
         />
         <AppTextField label="Password" name="password" secureTextEntry={true} disabled={isPending} />
         <AppSubmitButton disabled={isPending}>Login</AppSubmitButton>
+        <TextButton style={styles.textButton} onPress={() => router.push("/auth/register")}>
+          Nog geen account? Registreer
+        </TextButton>
       </DefaultView>
     </AppForm>
   );
@@ -63,6 +67,9 @@ const styles = StyleSheet.create({
   title: {
     marginTop: Variables.sizes.medium,
     marginBottom: Variables.sizes.xl,
+  },
+  textButton: {
+    width: "100%",
   },
 });
 

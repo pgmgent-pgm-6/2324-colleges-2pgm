@@ -23,7 +23,7 @@ const ClientForm = <T extends CreateClientBody | UpdateClientBody, U>({
   onSuccess,
   updateMethod,
   label,
-}: Props<T, U> & { children: React.ReactNode }) => {
+}: Props<T, U>) => {
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: updateMethod,
     onSuccess: onSuccess,

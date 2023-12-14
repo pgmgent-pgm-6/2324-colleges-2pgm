@@ -12,13 +12,7 @@ const ClientSpinnerField = (props: Omit<AppSpinnerFieldProps, "items">) => {
     return null;
   }
 
-  return (
-    <AppSpinnerField
-      name={props.name}
-      items={data.map((item) => ({ value: item.id, label: item.name }))}
-      {...props}
-    />
-  );
+  return <AppSpinnerField items={data.map((item) => ({ value: item.id, label: item.name }))} {...props} />;
 };
 
 export default ClientSpinnerField;

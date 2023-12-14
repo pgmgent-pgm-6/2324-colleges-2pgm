@@ -5,8 +5,8 @@ import AppTextField from "../Formik/AppTextField";
 import ErrorMessage from "@design/Text/ErrorMessage";
 import AppForm from "../Formik/AppForm";
 import AppSubmitButton from "../Formik/AppSubmitButton";
-import ClientSpinnerField from "../Client/ClientSpinnerField";
-import { CreateProjectBody, Project, UpdateProjectBody } from "@core/modules/projects/types";
+import ClientSpinnerField from "../Clients/ClientSpinnerField";
+import { CreateProjectBody, UpdateProjectBody } from "@core/modules/projects/types";
 
 const schema = yup.object().shape({
   name: yup.string().min(2).required(),

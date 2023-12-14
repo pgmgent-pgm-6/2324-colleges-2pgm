@@ -1,5 +1,6 @@
 import { supabase } from "@core/api/supabase";
 import { Session } from "@supabase/supabase-js";
+import { CreateUserBody } from "./types";
 
 export const getCurrentSession = async (): Promise<Session | null> => {
   const {
@@ -31,4 +32,22 @@ export const login = async ({ email, password }: LoginBody) => {
 
 export const logout = async () => {
   return supabase.auth.signOut();
+};
+
+export const createUser = async (user: CreateUserBody) => {
+  const { data, error } = await supabase.auth.signUp({
+    email: user.email,
+    password: user.password,
+    options: {
+      data: {
+        first_name: user.first_name,
+        last_name: user.last_name,
+      },
+    },
+  });
+
+  if (error) {
+    return Promise.reject(error);
+  }
+  return Promise.resolve(data.user);
 };

@@ -13,7 +13,7 @@ const AppTextField = ({ name, ...rest }: Props) => {
       value={values[name]}
       onChangeText={(text: string) => setFieldValue(name, text)}
       onBlur={handleBlur(name)}
-      error={hasError ? errors[name] : null}
+      error={hasError ? String(errors[name]) : null}
       {...rest}
     />
   );

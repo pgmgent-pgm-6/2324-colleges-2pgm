@@ -1,5 +1,5 @@
 import { supabase } from "@core/api/supabase";
-import { Client, CreateClientBody } from "./types";
+import { Client, CreateClientBody, UpdateClientBody } from "./types";
 
 export const getClients = async (): Promise<Client[] | null> => {
   const { data } = await supabase.from("clients").select("*").order("name").throwOnError();
@@ -19,5 +19,10 @@ export const getClientById = async (uid: string | number) => {
 
 export const createClient = async (client: CreateClientBody) => {
   const response = await supabase.from("clients").insert(client).throwOnError().single();
+  return Promise.resolve(response.data);
+};
+
+export const updateClient = async (client: UpdateClientBody) => {
+  const response = await supabase.from("clients").update(client).eq("id", client.id).throwOnError().single();
   return Promise.resolve(response.data);
 };

@@ -25,7 +25,6 @@ const ProjectCreateScreen = () => {
         updateMethod={createProject}
         onSuccess={handleSuccess}
         initialValues={{ client_id: clientId ? parseInt(clientId) : null, name: "" }}
-        options={{ showClient: isVoid(clientId) }}
         label="Create"
       />
     </DefaultView>

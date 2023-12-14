@@ -14,7 +14,7 @@ export type TextFieldProps = TextInputProps & {
   style?: StyleProp<ViewStyle>;
   disabled?: boolean;
   inputRef?: React.Ref<TextInput>;
-  error?: string;
+  error?: string | null;
 };
 
 const TextField = ({
@@ -28,7 +28,7 @@ const TextField = ({
   inputRef,
   error,
   ...rest
-}: Props) => {
+}: TextFieldProps) => {
   return (
     <View style={[styles.container, style]}>
       {label && <Label>{label}</Label>}

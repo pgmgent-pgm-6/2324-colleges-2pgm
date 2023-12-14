@@ -14,7 +14,6 @@ const ErrorMessage = ({ error }: Props) => {
   return null;
 };
 
-// todo
 const styles = StyleSheet.create({
   text: {
     width: "100%",

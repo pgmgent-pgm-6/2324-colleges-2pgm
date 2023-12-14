@@ -8,13 +8,13 @@ export type SpinnerFieldProps = {
   name: string;
   value: string;
   label?: string;
-  onChange: (value: string) => void;
+  onChange: (value: string | number) => void;
   style?: StyleProp<TextStyle>;
   placeholder?: string;
   items: { label: string; value: string | number }[];
   disabled?: boolean;
-  error?: string;
-  inputRef?: Ref<Picker<string>>;
+  error?: string | null;
+  inputRef?: Ref<Picker<string | number>>;
 } & PickerProps;
 
 const SpinnerField = ({
