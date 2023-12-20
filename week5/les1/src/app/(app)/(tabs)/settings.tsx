@@ -1,11 +1,6 @@
 import { logout } from "@core/modules/auth/api";
-import TextAvatar from "@design/Avatar/TextAvatar";
-import Button from "@design/Button/Button";
 import Divider from "@design/List/Divider";
-import ListHeader from "@design/List/ListHeader";
 import ListItem from "@design/List/ListItem";
-import Text from "@design/Text/Text";
-import { useAuthContext } from "@shared/Auth/AuthProvider";
 import UserHeader from "@shared/User/UserHeader";
 import { Variables } from "@style";
 import { useRouter } from "expo-router";

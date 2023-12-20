@@ -13,17 +13,27 @@ const schema = yup.object().shape({
   client_id: yup.number().required(),
 });
 
+type Options = {
+  showClient?: boolean;
+};
+
+const defaultOptions = {
+  showClient: true,
+};
+
 type Props<T, U> = {
   initialValues: T;
   onSuccess: (data: U) => void;
   updateMethod: (values: T) => Promise<U>;
   label: string;
+  options?: Options;
 };
 
 const ProjectForm = <T extends CreateProjectBody | UpdateProjectBody, U>({
   initialValues,
   onSuccess,
   updateMethod,
+  options,
   label,
 }: Props<T, U>) => {
   const { mutate, isPending, isError, error } = useMutation({
@@ -35,12 +45,16 @@ const ProjectForm = <T extends CreateProjectBody | UpdateProjectBody, U>({
     mutate(values);
   };
 
+  const formOptions = { ...defaultOptions, ...options };
+
   return (
     <AppForm initialValues={{ ...initialValues }} validationSchema={schema} onSubmit={handleSubmit}>
       <View>
         {isError && <ErrorMessage error={error} />}
         <AppTextField name="name" label="Project name" disabled={isPending} />
-        <ClientSpinnerField name="client_id" label="Client" disabled={isPending} />
+        {formOptions.showClient && (
+          <ClientSpinnerField name="client_id" label="Client" disabled={isPending} />
+        )}
         <AppSubmitButton disabled={isPending}>{label}</AppSubmitButton>
       </View>
     </AppForm>

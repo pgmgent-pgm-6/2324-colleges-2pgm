@@ -11,7 +11,7 @@ const ProjectsScreen = () => {
   const router = useRouter();
 
   const handleProjectPress = (project: Project) => {
-    router.push(`/projects/${project.id}}`);
+    router.push(`/projects/${project.id}`);
   };
 
   const handleAddProject = () => {
@@ -27,7 +27,7 @@ const ProjectsScreen = () => {
   return (
     <DataListView
       method={getProjects}
-      name={["project"]}
+      name={["projects"]}
       emptyTitle="Nog geen project"
       emptyDescription="Maak nu je eerste project aan"
       emptyIcon="folder"

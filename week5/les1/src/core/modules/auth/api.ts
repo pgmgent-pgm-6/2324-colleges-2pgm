@@ -79,7 +79,7 @@ export const updateUserAvatar = async (avatar: string) => {
 
   const { data, error } = await supabase.auth.updateUser({
     data: {
-      ...session?.user.user_metadata,
+      ...session?.user.user_metadata, // first_name, last_name, avatar (previous)
       avatar: fileName,
     },
   });
