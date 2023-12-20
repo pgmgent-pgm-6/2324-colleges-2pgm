@@ -8,6 +8,7 @@ import Text from "@design/Text/Text";
 import { useAuthContext } from "@shared/Auth/AuthProvider";
 import UserHeader from "@shared/User/UserHeader";
 import { Variables } from "@style";
+import { useRouter } from "expo-router";
 import { FlatList, StyleSheet, View } from "react-native";
 
 type Item = {
@@ -19,10 +20,13 @@ type Item = {
 };
 
 const SettingsScreen = () => {
+  const router = useRouter();
   const items: Item[] = [
     {
       key: "profile",
-      onPress: () => {},
+      onPress: () => {
+        router.push("/settings/edit");
+      },
     },
     {
       key: "logout",

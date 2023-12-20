@@ -48,6 +48,7 @@ const useSupabaseAuth = () => {
           email: auth.user.email ?? "",
           first_name: auth.user.user_metadata.first_name,
           last_name: auth.user.user_metadata.last_name,
+          avatar: auth.user.user_metadata.avatar,
         }
       : null;
   }, [auth]);
