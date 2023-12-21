@@ -1,6 +1,5 @@
 import { getClientById } from "@core/modules/clients/api";
 import { ClientWithRelations } from "@core/modules/clients/types";
-import { Project } from "@core/modules/projects/types";
 import HeaderButton from "@design/Button/HeaderButton";
 import Divider from "@design/List/Divider";
 import ListItem from "@design/List/ListItem";

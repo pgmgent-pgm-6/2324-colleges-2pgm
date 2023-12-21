@@ -6,8 +6,12 @@ import { Variables } from "@style";
 import { useRouter } from "expo-router";
 import { FlatList, StyleSheet, View } from "react-native";
 
+enum ListType {
+  Profile = "profile",
+}
+
 type Item = {
-  key: string;
+  key: ListType | string;
   title?: string;
   color?: string;
   icon?: string;
@@ -18,7 +22,7 @@ const SettingsScreen = () => {
   const router = useRouter();
   const items: Item[] = [
     {
-      key: "profile",
+      key: ListType.Profile,
       onPress: () => {
         router.push("/settings/edit");
       },
@@ -38,7 +42,7 @@ const SettingsScreen = () => {
         data={items}
         ItemSeparatorComponent={() => <Divider />}
         renderItem={({ item }) =>
-          item.key === "profile" ? (
+          item.key === ListType.Profile ? (
             <UserHeader onPress={item.onPress} />
           ) : (
             <ListItem
