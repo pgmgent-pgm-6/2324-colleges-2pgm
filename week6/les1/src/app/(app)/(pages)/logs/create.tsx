@@ -10,7 +10,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 const defaultValues = {
   comment: "",
   time: 0,
-  date: format(Date.now(), DATE_FORMAT),
+  date: format(new Date(), DATE_FORMAT),
   project_id: null,
 };
 

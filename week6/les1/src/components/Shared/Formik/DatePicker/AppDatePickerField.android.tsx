@@ -25,7 +25,7 @@ const AppDatePickerField = (props: Props) => {
     inputRef.current?.blur();
 
     DateTimePickerAndroid.open({
-      value: parse(value, DATE_FORMAT, new Date()),
+      value: value ? parse(value, DATE_FORMAT, new Date()) : new Date(),
       onChange: handleChange,
       mode: "date",
       is24Hour: true,
