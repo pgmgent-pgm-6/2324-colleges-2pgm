@@ -19,9 +19,18 @@ const LogEditScreen = () => {
   const navigation = useNavigation();
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
+  const [showDelete, setShowDelete] = useState(false);
   const queryClient = useQueryClient();
 
   useTitle("Edit log");
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <HeaderButton onPress={() => setShowDelete(true)} title="Delete log" icon="trash-can" />
+      ),
+    });
+  }, [navigation]);
 
   const handleSuccess = (data: Log) => {
     queryClient.invalidateQueries({ queryKey: ["logs"] }); // multiple at once to be sure
@@ -29,12 +38,11 @@ const LogEditScreen = () => {
     router.back();
   };
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => <HeaderButton onPress={() => {}} title="Delete log" icon="trash-can" />,
-      title: "Edit log",
-    });
-  }, [navigation]);
+  const handleDelete = () => {
+    queryClient.invalidateQueries({ queryKey: ["logs"] }); // multiple at once to be sure
+    queryClient.invalidateQueries({ queryKey: ["projects"] });
+    router.back();
+  };
 
   return (
     <>
@@ -54,6 +62,9 @@ const LogEditScreen = () => {
           );
         }}
       />
+      {showDelete && (
+        <DeleteLogDialog id={parseInt(id)} onDelete={handleDelete} onDismiss={() => setShowDelete(false)} />
+      )}
     </>
   );
 };
